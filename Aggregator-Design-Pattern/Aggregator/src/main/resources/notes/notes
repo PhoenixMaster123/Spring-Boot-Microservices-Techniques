@@ -1,0 +1,27 @@
+In your microservices you need to enable CORS
+
+That means:
+
+@Configuration
+public class CorsConfig {
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+
+        return addCorsMapping(registry) -> {
+                registry.addMapping("/**")
+                        .allowedOrigins("http://localhost:3000") // Adjust this to your frontend's URL
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*");
+        }
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+}
+
+Check this video for more details: https://www.youtube.com/watch?v=p_D64E-HHc4
+
+You can add fallback as well
