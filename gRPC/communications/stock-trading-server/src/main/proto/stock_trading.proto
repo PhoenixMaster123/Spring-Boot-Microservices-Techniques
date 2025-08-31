@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package stocktrading;
+option  java_multiple_files=true;
+option java_package="com.grpc";
+option  java_outer_classname="StockTradingProto";
+
+service StockTradingService {
+
+  // Unary RPC -> get the current price of a stock (Unary means one request, one response (similar to REST))
+  rpc GetStockPrice (StockRequest) returns (StockResponse);
+
+  // Server Streaming RPC -> real-time stock prices (one request, multiple responses (similar to WebSockets))
+  rpc SubscribeStockPrices (StockRequest) returns (stream StockResponse);
+}
+
+// They are like DTOs
+message StockRequest {
+  string stock_symbol = 1;
+}
+
+message StockResponse {
+  string stock_symbol = 1;
+  double price = 2;
+  string timestamp = 3;
+}

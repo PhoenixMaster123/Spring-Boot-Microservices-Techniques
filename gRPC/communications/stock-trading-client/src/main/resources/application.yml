@@ -1,0 +1,5 @@
+grpc:
+  client:
+    stockService: # Note: The name of the client is the same as the service name in the server
+      address: 'static://localhost:9090'
+      negotiationType: plaintext
